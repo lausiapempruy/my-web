@@ -1,0 +1,55 @@
+{
+  "site": {
+    "name": "Gerald's Private Web",
+    "version": "2.0.0",
+    "owner": "Gerald Jonathan William",
+    "tagline": "Hanyalah website gabut, portfolio mah serah, mau cuma profil aja ya serah, ga ada bermaksud buat sombong",
+    "year": 2026,
+    "lang": "id",
+    "url": ""
+  },
+  "socials": [
+    {
+      "type": "roblox",
+      "label": "My Roblox Account",
+      "url": "https://www.roblox.com/users/4207459058/profile",
+      "enabled": true
+    },
+    {
+      "type": "instagram",
+      "label": "@gerald.here_",
+      "url": "https://www.instagram.com/gerald.here_/",
+      "enabled": true
+    },
+    {
+      "type": "whatsapp_group",
+      "label": "Gerald's Group by Xysn_GG",
+      "url": "https://chat.whatsapp.com/FDSczsefNnq2S8WWe9hvDv",
+      "enabled": true
+    },
+    {
+      "type": "whatsapp_channel",
+      "label": "Xysn_GG Official Channel",
+      "url": "https://whatsapp.com/channel/0029VbCU7Mm9WtC0784kCK1g",
+      "enabled": true
+    }
+  ],
+  "communities": [
+    {
+      "id": "dri",
+      "name": "DRI Studio",
+      "description": "Server Permersatu Roblox Indonesia",
+      "url": "https://discord.gg/5237rayp2H",
+      "enabled": true
+    }
+  ],
+  "works": [
+    {
+      "id": "",
+      "title": "",
+      "description": "",
+      "url": "",
+      "enabled": false
+    }
+  ]
+}
