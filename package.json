@@ -32,6 +32,18 @@
       "label": "Xysn_GG Official Channel",
       "url": "https://whatsapp.com/channel/0029VbCU7Mm9WtC0784kCK1g",
       "enabled": true
+    },
+    {
+      "type": "whatsapp_channel",
+      "label": "PitchBrief Channel",
+      "url": "https://whatsapp.com/channel/0029Vb8wnzd3GJOt3mCwsN0x",
+      "enabled": true
+    },
+    {
+      "type": "whatsapp_channel",
+      "label": "MR48H"
+      "url": "https://whatsapp.com/channel/0029VbCnyQTDDmFb64yqT93v",
+      "enabled": true
     }
   ],
   "communities": [
