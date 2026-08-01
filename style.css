@@ -1,0 +1,761 @@
+/* ============================================
+   Gerald's Private Web v2 — style.css
+   Design: HumanCraft — "Ruang digital milik
+   Gerald. Tenang, confident, ga pamer."
+   Palette: Pure Black & White
+   Font: Inter (rsms.me)
+   ============================================ */
+
+@import url('https://rsms.me/inter/inter.css');
+
+/* ── Reset ── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ── Design Tokens ── */
+:root {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+
+  /* Palette — pure black/white */
+  --bg:             #080808;
+  --bg-deep:        #040404;
+  --bg-surface:     #0f0f0f;
+  --text:           #ffffff;
+  --text-sub:       rgba(255,255,255,0.50);
+  --text-muted:     rgba(255,255,255,0.24);
+  --text-faint:     rgba(255,255,255,0.12);
+
+  /* Glass */
+  --glass-bg:       rgba(255,255,255,0.048);
+  --glass-bg-hi:    rgba(255,255,255,0.085);
+  --glass-border:   rgba(255,255,255,0.088);
+  --glass-border-hi:rgba(255,255,255,0.16);
+  --glass-blur:     blur(24px);
+  --glass-blur-sm:  blur(12px);
+
+  /* Shadows */
+  --shadow-card:    0 2px 1px rgba(255,255,255,0.04) inset,
+                    0 32px 80px rgba(0,0,0,0.55),
+                    0 8px 24px rgba(0,0,0,0.35);
+  --shadow-item:    0 1px 0 rgba(255,255,255,0.05) inset,
+                    0 8px 24px rgba(0,0,0,0.3);
+
+  /* Type scale — fluid */
+  --text-xs:    clamp(0.7rem,  0.65rem + 0.2vw, 0.8rem);
+  --text-sm:    clamp(0.85rem, 0.8rem  + 0.2vw, 0.95rem);
+  --text-base:  clamp(1rem,    0.95rem + 0.2vw, 1.1rem);
+  --text-lg:    clamp(1.2rem,  1.1rem  + 0.5vw, 1.45rem);
+  --text-xl:    clamp(1.6rem,  1.3rem  + 1.2vw, 2.2rem);
+  --text-2xl:   clamp(2.4rem,  1.8rem  + 2.5vw, 4.2rem);
+
+  /* Spacing */
+  --sp-xs:  clamp(0.5rem,  0.4rem  + 0.4vw, 0.75rem);
+  --sp-sm:  clamp(0.75rem, 0.6rem  + 0.6vw, 1.25rem);
+  --sp-md:  clamp(1.5rem,  1.2rem  + 1.2vw, 2.5rem);
+  --sp-lg:  clamp(2.5rem,  2rem    + 2vw,   4.5rem);
+  --sp-xl:  clamp(4rem,    3rem    + 4vw,   8rem);
+
+  /* Radius */
+  --r-sm:   12px;
+  --r-md:   20px;
+  --r-lg:   28px;
+  --r-xl:   36px;
+  --r-pill: 999px;
+
+  /* Easing */
+  --ease:        cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-spring: linear(0,0.006,0.025 2.8%,0.101 6.1%,0.539 18.9%,0.721 25.3%,
+                 0.849 31.5%,0.937 38.1%,0.968 41.8%,0.991 45.7%,
+                 1.006 50.1%,1.015 55%,1.017 63.9%,1.001 91.7%,1);
+}
+
+/* ── Base ── */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Noise texture — tactile, bukan dekoratif */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.028'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  pointer-events: none;
+  z-index: 9000;
+}
+
+/* ============================================
+   LOADER
+   ============================================ */
+
+#loader {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.8s var(--ease), visibility 0.8s var(--ease);
+}
+
+#loader.out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.loader-wordmark {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+
+.loader-track {
+  width: 80px;
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+  overflow: hidden;
+}
+
+.loader-fill {
+  height: 100%;
+  width: 0%;
+  background: #fff;
+  animation: loadFill 1.6s var(--ease) forwards;
+}
+
+@keyframes loadFill {
+  0%   { width: 0%; }
+  60%  { width: 68%; }
+  100% { width: 100%; }
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--sp-md);
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('./assets/background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: scale(1.05);
+  transition: transform 0.1s linear;
+  z-index: 0;
+}
+
+/* Dark overlay — bukan gradient random, ini ngarahin mata ke tengah */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 70% at 50% 50%, rgba(8,8,8,0.15) 0%, transparent 70%),
+    linear-gradient(to bottom,
+      rgba(4,4,4,0.60) 0%,
+      rgba(4,4,4,0.20) 35%,
+      rgba(4,4,4,0.20) 65%,
+      rgba(4,4,4,0.92) 100%
+    );
+  z-index: 1;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 0;
+}
+
+/* Glass card — glass dipakai karena
+   foto background butuh layer pemisah yang berasa "depth" */
+.hero-card {
+  width: 100%;
+  background: rgba(8,8,8,0.48);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-xl);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  padding: clamp(36px, 6vw, 64px) clamp(28px, 5vw, 56px);
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Top shimmer — menunjukkan batas kaca, bukan dekoratif */
+.hero-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 8%; right: 8%;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(255,255,255,0.20) 30%,
+    rgba(255,255,255,0.20) 70%,
+    transparent
+  );
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: clamp(20px, 3vw, 32px);
+}
+
+.hero-eyebrow-dot {
+  width: 4px;
+  height: 4px;
+  background: rgba(255,255,255,0.35);
+  border-radius: 50%;
+  animation: dotPulse 3s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 0.35; }
+  50%       { opacity: 0.08; }
+}
+
+.hero-name {
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.0;
+  color: var(--text);
+  margin-bottom: clamp(14px, 2vw, 22px);
+}
+
+/* Nama belakang lebih redup — hierarchy, bukan efek */
+.hero-name .surname {
+  color: rgba(255,255,255,0.52);
+  font-weight: 300;
+  display: block;
+  font-size: 0.52em;
+  letter-spacing: 0.01em;
+  margin-top: 6px;
+}
+
+.hero-tagline {
+  font-size: var(--text-sm);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text-sub);
+  line-height: 1.75;
+  max-width: 520px;
+  margin-bottom: clamp(24px, 4vw, 40px);
+}
+
+.hero-rule {
+  width: 32px;
+  height: 1px;
+  background: rgba(255,255,255,0.18);
+  margin-bottom: clamp(20px, 3vw, 32px);
+}
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.hero-meta-tag {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.045);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: var(--r-pill);
+  padding: 5px 13px;
+}
+
+/* Scroll hint */
+.hero-scroll {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  animation: scrollHint 3s ease-in-out infinite;
+}
+
+.hero-scroll span {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.hero-scroll-line {
+  width: 1px;
+  height: 26px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent);
+}
+
+@keyframes scrollHint {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(8px); }
+}
+
+/* ============================================
+   SECTION BASE
+   ============================================ */
+
+.section {
+  padding: var(--sp-xl) var(--sp-md);
+  position: relative;
+}
+
+.section-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: clamp(24px, 3vw, 36px);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+  max-width: 60px;
+}
+
+/* ============================================
+   GLASS CARD (shared)
+   ============================================ */
+
+.glass-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-lg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--shadow-item);
+  position: relative;
+  overflow: hidden;
+  transition:
+    border-color 0.3s var(--ease),
+    box-shadow   0.3s var(--ease),
+    background   0.3s var(--ease);
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 8%; right: 8%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.09), transparent);
+  pointer-events: none;
+}
+
+.glass-card:hover {
+  border-color: var(--glass-border-hi);
+  background: var(--glass-bg-hi);
+}
+
+/* ============================================
+   DESKRIPSI SECTION
+   ============================================ */
+
+#deskripsi .glass-card {
+  padding: clamp(28px, 4vw, 48px);
+}
+
+/* Markdown styles di dalam glass card */
+#deskripsi h1 {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 18px;
+  letter-spacing: -0.02em;
+}
+
+#deskripsi h2 {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-top: 28px;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+#deskripsi p {
+  font-size: var(--text-base);
+  color: var(--text-sub);
+  line-height: 1.85;
+  margin-bottom: 10px;
+}
+
+#deskripsi ul {
+  padding-left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+#deskripsi li {
+  font-size: var(--text-sm);
+  color: var(--text-sub);
+  line-height: 1.7;
+}
+
+#deskripsi strong { color: var(--text); font-weight: 600; }
+#deskripsi em     { color: var(--text-sub); font-style: italic; }
+#deskripsi hr     { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 20px 0; }
+#deskripsi code   {
+  font-family: 'JetBrains Mono', 'SF Mono', monospace;
+  font-size: 0.85em;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  padding: 2px 7px;
+  color: rgba(255,255,255,0.65);
+}
+
+#deskripsi a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(255,255,255,0.18);
+  transition: color 0.2s;
+}
+
+#deskripsi a:hover { color: var(--text); }
+
+.desk-empty {
+  font-size: var(--text-sm);
+  color: var(--text-faint);
+  font-style: italic;
+}
+
+/* ============================================
+   KOMUNITAS SECTION
+   ============================================ */
+
+.komunitas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.komunitas-card {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.komunitas-name {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.komunitas-desc {
+  font-size: var(--text-sm);
+  color: var(--text-sub);
+  line-height: 1.65;
+}
+
+.komunitas-arrow {
+  font-size: var(--text-sm);
+  color: var(--text-faint);
+  margin-top: 4px;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.komunitas-card:hover .komunitas-arrow {
+  color: var(--text-sub);
+  transform: translateX(3px);
+}
+
+/* ============================================
+   KARYA SECTION
+   ============================================ */
+
+.karya-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.karya-card {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.karya-title {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.karya-desc {
+  font-size: var(--text-sm);
+  color: var(--text-sub);
+  line-height: 1.65;
+}
+
+/* ============================================
+   SOSIAL SECTION
+   ============================================ */
+
+.sosial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 10px;
+}
+
+.sosial-item {
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text);
+  border-radius: var(--r-md);
+  transition:
+    background     0.25s var(--ease),
+    border-color   0.25s var(--ease),
+    transform      0.25s var(--ease-spring);
+}
+
+.sosial-item:hover {
+  transform: translateY(-2px);
+}
+
+.sosial-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sosial-icon svg {
+  width: 16px;
+  height: 16px;
+  fill: rgba(255,255,255,0.65);
+}
+
+.sosial-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.sosial-type {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.sosial-label {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: rgba(255,255,255,0.75);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sosial-empty {
+  font-size: var(--text-sm);
+  color: var(--text-faint);
+  font-style: italic;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+footer {
+  padding: var(--sp-lg) var(--sp-md);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.footer-name {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-faint);
+}
+
+.footer-note {
+  font-size: var(--text-xs);
+  color: var(--text-faint);
+  font-style: italic;
+}
+
+/* ============================================
+   SCROLL REVEAL
+   ============================================ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity   0.7s var(--ease),
+    transform 0.7s var(--ease);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+
+::-webkit-scrollbar       { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.08);
+  border-radius: 100px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.18);
+}
+
+/* ============================================
+   SELECTION
+   ============================================ */
+
+::selection {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .hero-card {
+    border-radius: var(--r-lg);
+    text-align: left;
+  }
+
+  .komunitas-grid,
+  .karya-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sosial-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
+
+@media (max-width: 420px) {
+  .sosial-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
