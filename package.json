@@ -57,11 +57,11 @@
   ],
   "works": [
     {
-      "id": "",
-      "title": "",
-      "description": "",
-      "url": "",
-      "enabled": false
+      "id": "web-1",
+      "title": "Gol Bola",
+      "description": "Gol Bola adalah website simulasi pertandingan bola, bisa dimainin atau bisa diliat saja, dan ini terbukti menghasilkan seru, dan juga anda bebas mengatur permainan sesuka hati mungkin di Sandbox Mode",
+      "url": "https://lausiapempruy.github.io/gol-bola/",
+      "enabled": true
     }
   ]
 }
