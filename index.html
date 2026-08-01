@@ -6,12 +6,9 @@
   <meta name="description" content="Gerald Jonathan William — website pribadi, bukan buat sombong." />
   <meta name="author" content="Gerald Jonathan William" />
   <meta name="robots" content="noindex, nofollow" />
-  <meta property="og:title" content="Gerald's Private Web" />
-  <meta property="og:description" content="Hanyalah website gabut. Bukan buat sombong." />
-  <meta property="og:type" content="website" />
   <title>Gerald's Private Web</title>
 
-  <!-- Favicon inline — G monogram SVG -->
+  <!-- Favicon inline -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23080808'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Inter%2C-apple-system%2Csans-serif' font-size='18' font-weight='800' fill='%23ffffff'%3EG%3C/text%3E%3C/svg%3E" />
 
   <link rel="stylesheet" href="style.css" />
@@ -31,6 +28,29 @@
   </div>
 
   <!-- ══════════════════════════════════
+       FLOATING DOCK NAV
+  ══════════════════════════════════ -->
+  <nav id="floatingDock" aria-label="Navigasi">
+    <div class="dock-inner" id="dockInner">
+      <a class="dock-item" href="#hero"      data-label="Home">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.75L12 3l9 6.75V21a1 1 0 01-1 1H4a1 1 0 01-1-1V9.75z"/><path d="M9 22V12h6v10"/></svg>
+      </a>
+      <a class="dock-item" href="#deskripsi" data-label="Sekilas">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      </a>
+      <a class="dock-item" href="#komunitas" data-label="Dunia Gw">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><path d="M3 20c0-3 2.7-5 6-5"/><circle cx="17" cy="7" r="3"/><path d="M21 20c0-3-2.7-5-6-5"/><path d="M9 20c0-3 1.8-5 4-5s4 2 4 5"/></svg>
+      </a>
+      <a class="dock-item" href="#karya"     data-label="Karya">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      </a>
+      <a class="dock-item" href="#sosial"    data-label="Kontak">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════
        HERO
   ══════════════════════════════════ -->
   <section id="hero" aria-label="Banner utama">
@@ -45,14 +65,46 @@
           Gerald's Private Web
         </div>
 
-        <h1 class="hero-name">
-          Gerald Jonathan
-          <span class="surname">William</span>
-        </h1>
+        <!-- Text Hover Effect: nama Gerald -->
+        <div class="hero-name-wrap">
+          <svg class="hero-name-svg" viewBox="0 0 520 90" xmlns="http://www.w3.org/2000/svg" id="heroNameSvg">
+            <defs>
+              <radialGradient id="revealMask" gradientUnits="userSpaceOnUse" r="18%" cx="50%" cy="50%">
+                <stop offset="0%" stop-color="white"/>
+                <stop offset="100%" stop-color="black"/>
+              </radialGradient>
+              <mask id="textMask">
+                <rect x="0" y="0" width="100%" height="100%" fill="url(#revealMask)"/>
+              </mask>
+            </defs>
+            <!-- Base stroke — selalu terlihat -->
+            <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle"
+              class="hero-svg-text hero-svg-base">Gerald Jonathan William</text>
+            <!-- Animated stroke draw -->
+            <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle"
+              class="hero-svg-text hero-svg-draw" id="heroSvgDraw">Gerald Jonathan William</text>
+            <!-- Gradient reveal on hover -->
+            <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle"
+              class="hero-svg-text hero-svg-gradient" mask="url(#textMask)">Gerald Jonathan William</text>
+          </svg>
+        </div>
 
+        <!-- Pointer Highlight: tagline -->
         <p class="hero-tagline">
-          "Hanyalah website gabut, portfolio mah serah,
-          mau cuma profil aja ya serah, ga ada bermaksud buat sombong"
+          Hanyalah website gabut,
+          <span class="pointer-highlight-wrap">
+            <span class="pointer-highlight-text">portfolio mah serah,</span>
+            <span class="pointer-highlight-border" aria-hidden="true"></span>
+            <span class="pointer-highlight-cursor" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103z"/></svg>
+            </span>
+          </span>
+          mau cuma profil aja ya serah, ga ada bermaksud buat sombong.
+        </p>
+
+        <!-- Text Generate Effect: subtitle -->
+        <p class="hero-subtitle" id="heroSubtitle" aria-label="Website Pribadi · 2026">
+          <!-- Diisi JS word by word -->
         </p>
 
         <div class="hero-rule"></div>
@@ -76,43 +128,46 @@
   ══════════════════════════════════ -->
   <section id="deskripsi" class="section" aria-label="Sekilas">
     <div class="section-inner">
-
       <div class="section-label reveal">Sekilas</div>
-
       <div class="glass-card reveal" style="padding: clamp(28px,4vw,48px)">
-        <div id="deskContent">
-          <p class="desk-empty">Memuat...</p>
-        </div>
+        <div id="deskContent"><p class="desk-empty">Memuat...</p></div>
       </div>
-
     </div>
   </section>
 
   <!-- ══════════════════════════════════
-       DUNIA GW (KOMUNITAS)
+       DUNIA GW — Card Stack
   ══════════════════════════════════ -->
   <section id="komunitas" class="section" aria-label="Komunitas">
     <div class="section-inner">
-
       <div class="section-label reveal">Dunia Gw</div>
 
-      <div class="komunitas-grid reveal" id="komunitasGrid">
-        <!-- Diisi app.js dari package.json -->
+      <!-- Card Stack: komunitas cards -->
+      <div class="card-stack-wrap reveal">
+        <div class="card-stack" id="komunitasStack">
+          <!-- Diisi app.js dari package.json -->
+        </div>
+        <div class="card-stack-hint">Klik kartu untuk geser →</div>
       </div>
 
     </div>
   </section>
 
   <!-- ══════════════════════════════════
-       YANG GW BUAT (KARYA)
+       YANG GW BUAT — Tabs
   ══════════════════════════════════ -->
   <section id="karya" class="section" aria-label="Karya">
     <div class="section-inner">
-
       <div class="section-label reveal">Yang Gw Buat</div>
 
-      <div class="karya-grid reveal" id="karyaGrid">
-        <!-- Diisi app.js dari package.json -->
+      <!-- Tabs: karya -->
+      <div class="tabs-wrap reveal" id="karyaTabs">
+        <div class="tabs-nav" id="karyaTabsNav">
+          <!-- Diisi app.js -->
+        </div>
+        <div class="tabs-content" id="karyaTabsContent">
+          <!-- Diisi app.js -->
+        </div>
       </div>
 
     </div>
@@ -123,13 +178,10 @@
   ══════════════════════════════════ -->
   <section id="sosial" class="section" aria-label="Kontak dan sosial">
     <div class="section-inner">
-
       <div class="section-label reveal">Kontak & Sosial</div>
-
       <div class="sosial-grid reveal" id="sosialGrid">
         <!-- Diisi app.js dari package.json -->
       </div>
-
     </div>
   </section>
 
@@ -142,6 +194,12 @@
   </footer>
 
   <script src="security.js"></script>
+  <script src="modules/ads.js"></script>
+  <script src="modules/loader.js"></script>
+  <script src="modules/reveal.js"></script>
+  <script src="modules/parallax.js"></script>
+  <script src="modules/md-parser.js"></script>
+  <script src="modules/sosial.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
