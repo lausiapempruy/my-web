@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Gerald Jonathan William — website pribadi, bukan buat sombong." />
+  <meta name="author" content="Gerald Jonathan William" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta property="og:title" content="Gerald's Private Web" />
+  <meta property="og:description" content="Hanyalah website gabut. Bukan buat sombong." />
+  <meta property="og:type" content="website" />
+  <title>Gerald's Private Web</title>
+
+  <!-- Favicon inline — G monogram SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23080808'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Inter%2C-apple-system%2Csans-serif' font-size='18' font-weight='800' fill='%23ffffff'%3EG%3C/text%3E%3C/svg%3E" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════
+       LOADER
+  ══════════════════════════════════ -->
+  <div id="loader" aria-hidden="true">
+    <div class="loader-inner">
+      <div class="loader-wordmark">Gerald's Private Web</div>
+      <div class="loader-track">
+        <div class="loader-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       HERO
+  ══════════════════════════════════ -->
+  <section id="hero" aria-label="Banner utama">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-inner">
+      <div class="hero-card" id="heroCard">
+
+        <div class="hero-eyebrow">
+          <span class="hero-eyebrow-dot"></span>
+          Gerald's Private Web
+        </div>
+
+        <h1 class="hero-name">
+          Gerald Jonathan
+          <span class="surname">William</span>
+        </h1>
+
+        <p class="hero-tagline">
+          "Hanyalah website gabut, portfolio mah serah,
+          mau cuma profil aja ya serah, ga ada bermaksud buat sombong"
+        </p>
+
+        <div class="hero-rule"></div>
+
+        <div class="hero-meta">
+          <span class="hero-meta-tag">Personal</span>
+          <span class="hero-meta-tag">2026</span>
+        </div>
+
+      </div>
+    </div>
+
+    <button class="hero-scroll" id="heroScroll" aria-label="Scroll ke bawah" type="button">
+      <span>Scroll</span>
+      <div class="hero-scroll-line"></div>
+    </button>
+  </section>
+
+  <!-- ══════════════════════════════════
+       SEKILAS (DESKRIPSI)
+  ══════════════════════════════════ -->
+  <section id="deskripsi" class="section" aria-label="Sekilas">
+    <div class="section-inner">
+
+      <div class="section-label reveal">Sekilas</div>
+
+      <div class="glass-card reveal" style="padding: clamp(28px,4vw,48px)">
+        <div id="deskContent">
+          <p class="desk-empty">Memuat...</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       DUNIA GW (KOMUNITAS)
+  ══════════════════════════════════ -->
+  <section id="komunitas" class="section" aria-label="Komunitas">
+    <div class="section-inner">
+
+      <div class="section-label reveal">Dunia Gw</div>
+
+      <div class="komunitas-grid reveal" id="komunitasGrid">
+        <!-- Diisi app.js dari package.json -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       YANG GW BUAT (KARYA)
+  ══════════════════════════════════ -->
+  <section id="karya" class="section" aria-label="Karya">
+    <div class="section-inner">
+
+      <div class="section-label reveal">Yang Gw Buat</div>
+
+      <div class="karya-grid reveal" id="karyaGrid">
+        <!-- Diisi app.js dari package.json -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       KONTAK & SOSIAL
+  ══════════════════════════════════ -->
+  <section id="sosial" class="section" aria-label="Kontak dan sosial">
+    <div class="section-inner">
+
+      <div class="section-label reveal">Kontak & Sosial</div>
+
+      <div class="sosial-grid reveal" id="sosialGrid">
+        <!-- Diisi app.js dari package.json -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       FOOTER
+  ══════════════════════════════════ -->
+  <footer aria-label="Footer">
+    <div class="footer-name">Gerald Jonathan William</div>
+    <div class="footer-note">bukan buat sombong.</div>
+  </footer>
+
+  <script src="security.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
